@@ -14,6 +14,7 @@
     "fs": "^0.0.1-security",
     "js-yaml": "^3.12.0",
     "koa": "^2.5.1",
+    "koa-router": "^7.4.0",
     "node-phantom": "^0.2.5",
     "phantom": "^4.0.12",
     "phantomjs": "^2.1.7+deprecated",
