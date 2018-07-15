@@ -22,6 +22,7 @@ fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
   const arr = data.toUpperCase().split('\n')
   let category = ''
   db.connect('db', ['goods']);
+  db.goods.remove({owner}, true);
   arr.forEach(goods => {
     goods = goods.trim()
     if (!goods) {
@@ -50,6 +51,13 @@ const setGoods = (owner, category,goodsStr ) => {
   if(priceTest) {
     price = priceTest[0].replace(/\=/, '').trim()
     comment = text.substr(priceTest.index).replace(priceReg, '').trim()
+    if(comment.indexOf('IST') !== -1) {
+      priceUnit = 'IST'
+    } else if (comment.indexOf('PG') !== -1) {
+      priceUnit = 'PG'
+    } else {
+      priceUnit = 'IST'
+    }
     propTxt = text.substr(0, priceTest.index)
   }
   let propArr = propTxt.trim().replace(/\s\s*/g,' ').split(' ')
@@ -59,7 +67,7 @@ const setGoods = (owner, category,goodsStr ) => {
     const allProp = translator(p)
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, category, price, comment}, prop)
+  let goods = Object.assign({text, owner, category, price, priceUnit, comment}, prop)
   return goods
   
 }
