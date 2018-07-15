@@ -7,10 +7,13 @@ const translator = (value) => {
   const typeTxt = value.replace(/[0-9]/g, '')
   const type = PROP[typeTxt]?PROP[typeTxt]:''
   numReg = /[0-9]+/
-  const num =  numReg.exec(value) ? numReg.exec(value)[0] : 0
+  let num =  numReg.exec(value) ? numReg.exec(value)[0] : 0
+  if (type==='FCR' && num===0) {
+    num = 10
+  }
   let res = {}
-  res[type] = num
-  return res
+  res[type] = true
+  return Object.assign(res, {propArray:[{name: type, value: num}]})
 }
 
 const name = 'sample'
@@ -62,12 +65,14 @@ const setGoods = (owner, category,goodsStr ) => {
   }
   let propArr = propTxt.trim().replace(/\s\s*/g,' ').split(' ')
   let prop = {}
-
+  let propArray = []
   propArr.forEach(p => {
     const allProp = translator(p)
+    propArray = propArray.concat(allProp.propArray)
+    delete allProp.propArray
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, category, price, priceUnit, comment}, prop)
+  let goods = Object.assign({text, owner, category, price, priceUnit, comment}, prop, {propArray: propArray})
   return goods
   
 }

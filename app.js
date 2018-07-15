@@ -15,6 +15,7 @@ router.get('/getGoods', (ctx, next) => {
   currentPage = currentPage ? currentPage : 1
   pageSize = pageSize ? pageSize : 20
   filter = filter ? JSON.parse(filter) : {}
+  
   let finder = db.goods.find(filter)
   const total = finder.length
   const start = (currentPage - 1) * pageSize
