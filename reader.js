@@ -16,7 +16,7 @@ const translator = (value) => {
   return Object.assign(res, {propArray:[{name: type, value: num}]})
 }
 
-const name = '献血之披风'
+const name = '大仁哥'
 
 fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
   // console.log(data);  

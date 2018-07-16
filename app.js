@@ -14,9 +14,19 @@ router.get('/getGoods', (ctx, next) => {
   console.log(filter)
   currentPage = currentPage ? currentPage : 1
   pageSize = pageSize ? pageSize : 20
-  filter = filter ? JSON.parse(filter) : {}
-  
-  let finder = db.goods.find(filter)
+  let filterObj = filter ? JSON.parse(filter) : {}
+  let finder = db.goods.find(filterObj)
+  if (filter !== '{}') {
+    finder = finder.filter( i => {
+      let res = true
+      for(let prop in filterObj) {
+        if(!i[prop]) {
+          res = false
+        }
+      }
+      return res
+    })
+  }
   const total = finder.length
   const start = (currentPage - 1) * pageSize
   const end = currentPage * pageSize
@@ -28,5 +38,5 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-console.log('running app on 3000')
+console.log('running app on 3888')
 app.listen(3888);
