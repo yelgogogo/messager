@@ -16,32 +16,38 @@ const translator = (value) => {
   return Object.assign(res, {propArray:[{name: type, value: num}]})
 }
 
-const name = '大仁哥'
+const ownerArray = ['大仁哥', '献血之披风']
 
-fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
-  // console.log(data);  
-  const file = name.split('_')
-  let owner = name
-  const arr = data.toUpperCase().split('\n')
-  let category = ''
-  db.connect('db', ['goods']);
-  db.goods.remove({owner}, true);
-  arr.forEach(goods => {
-    goods = goods.trim()
-    if (!goods) {
-      category = ''
-    }
-    // console.log(goods)
-    if (CATEGORY[goods]) {
-      category = CATEGORY[goods]
-    } else {      
-      if (category) {
-        db.goods.save(setGoods(owner, category, goods));
+const readFile = (name) => {
+  fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
+    // console.log(data);  
+    const file = name.split('_')
+    let owner = name
+    const arr = data.toUpperCase().split('\n')
+    let category = ''
+    db.connect('db', ['goods']);
+    db.goods.remove({owner}, true);
+    arr.forEach(goods => {
+      goods = goods.trim()
+      if (!goods) {
+        category = ''
       }
-    }
-  })
+      // console.log(goods)
+      if (CATEGORY[goods]) {
+        category = CATEGORY[goods]
+      } else {      
+        if (category) {
+          db.goods.save(setGoods(owner, category, goods));
+        }
+      }
+    })
+  
+  });
+}
 
-});
+ownerArray.forEach(o => {
+  readFile(o);
+})
 
 const setGoods = (owner, category,goodsStr ) => {
   const text = goodsStr.trim()
