@@ -17,6 +17,7 @@ const PROP = {
 	'AMA_SKILL_TXT': '亚马逊技能',
 	'DEX': 'DEX',
 	'DEX_TXT': '敏捷',
+	'HFD': 'HFD',
 	'冰冻减半': 'HFD',
 	'HFD_TXT': '冰冻减半',
 	'ED': 'ED',
@@ -75,7 +76,7 @@ const PROP = {
 	'CR_TXT' : '冰霜抗性'
 }
 
-CATEGORY = {
+const CATEGORY = {
 	'项链：':'AMULET',
 	'项链:':'AMULET',
 	'AMULET_TXT': '项链',

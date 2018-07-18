@@ -7,8 +7,8 @@ const translator = (value) => {
   const typeTxt = value.replace(/[0-9]/g, '')
   const type = PROP[typeTxt]?PROP[typeTxt]:''
   numReg = /[0-9]+/
-  let num =  numReg.exec(value) ? numReg.exec(value)[0] : 0
-  if (type==='FCR' && num===0) {
+  let num =  numReg.exec(value) ? numReg.exec(value)[0] : ''
+  if (type==='FCR' && num==='') {
     num = 10
   }
   let res = {}
@@ -17,7 +17,7 @@ const translator = (value) => {
 }
 
 const ownerArray = ['大仁哥', '献血之披风']
-
+// const ownerArray = ['sample']
 const readFile = (name) => {
   fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
     // console.log(data);  
@@ -54,18 +54,22 @@ const setGoods = (owner, category,goodsStr ) => {
   let priceReg = /\=\s*[0-9]+/
   let priceTest = priceReg.exec(text)
   let price = 0
+  let priceValue = 0
   let comment = ''
   let propTxt = ''
   propTxt = text
   if(priceTest) {
-    price = priceTest[0].replace(/\=/, '').trim()
+    price = parseInt(priceTest[0].replace(/\=/, '').trim())
     comment = text.substr(priceTest.index).replace(priceReg, '').trim()
     if(comment.indexOf('IST') !== -1) {
       priceUnit = 'IST'
+      priceValue = price * 40
     } else if (comment.indexOf('PG') !== -1) {
       priceUnit = 'PG'
+      priceValue = price
     } else {
       priceUnit = 'IST'
+      priceValue = price * 40
     }
     propTxt = text.substr(0, priceTest.index)
   }
@@ -78,7 +82,7 @@ const setGoods = (owner, category,goodsStr ) => {
     delete allProp.propArray
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, category, price, priceUnit, comment}, prop, {propArray: propArray})
+  let goods = Object.assign({text, owner, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
   return goods
   
 }

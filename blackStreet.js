@@ -2,14 +2,19 @@ const Koa = require('koa');
 const db = require('diskdb');
 const cors = require('koa2-cors');
 const Router = require('koa-router');
+const {PROP, CATEGORY} = require('./utils/enum')
 
 const app = new Koa();
 app.use(cors());
 const router = new Router();
 
+// router.get('/getEnum', (ctx, next) => {
+//   ctx.body = {PROP, CATEGORY};
+// });
+
 router.get('/getGoods', (ctx, next) => {
   // ctx.router available
-  let {currentPage, pageSize, filter} = ctx.request.query
+  let {currentPage, pageSize, filter, sorter} = ctx.request.query
   db.connect('db', ['goods']);
   console.log(filter)
   currentPage = currentPage ? currentPage : 1
@@ -23,6 +28,16 @@ router.get('/getGoods', (ctx, next) => {
         if(!i[prop]) {
           res = false
         }
+      }
+      return res
+    })
+  }
+  if(sorter !== '{}') {
+    let sorterObj = sorter ? JSON.parse(sorter) : {}
+    finder = finder.sort( (a, b) => {
+      let res = a[sorterObj.name] > b[sorterObj.name] ? 1 : -1
+      if (!sorterObj.asc) {
+        res = 0 - res
       }
       return res
     })
