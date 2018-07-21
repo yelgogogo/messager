@@ -18,8 +18,11 @@ router.get('/getGoods', (ctx, next) => {
   let {currentPage, pageSize, filter, sorter} = ctx.request.query
   const clientIp = ctx.request.ip;
   const time = moment().format('YYYY-MM-DD HH:mm:ss');
+  const date = moment().format('YYYY-MM-DD')
+  const hour = moment().format('HH')
+  const minute = moment().format('HH:mm')
   db.connect('db', ['logs']);
-  db.logs.save({clientIp, time})
+  db.logs.save({clientIp, time, date, hour, minute})
   db.connect('db', ['goods']);
 
   currentPage = currentPage ? currentPage : 1
