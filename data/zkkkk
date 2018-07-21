@@ -1,0 +1,105 @@
+盾牌:
+10fhr 30 20 34ed 4rep 20r 34fr  =16
+136def  30 20 20r 30fr         =4
+30 20 80ed 16r 4mana dr2 mdr3   =8
+136def 30 20 20r 30fr           =8
+17fhr 30 20 14ed 18r 3mana mdr2 =8
+30 20 67ed 1str 16r 23lr  REQ20 =8 
+30 20 83ed 18r req30  =12
+2p  47ed 15fr req20  =4   
+2p  38ed 23fr  mdr3    =16         
+2p 16r  6mana MDR3    白骨 =5
+31def 2p 15 10 18r   轻盾      =2
+
+腰带:
+22ed 16str 9mana 20fr =2
+24fhr 66ed 23lf 30lr 25fr =10
+10fhr 60ed 47lf 27lr 28fr =12
+17fhr 43lf 18cr 19fr 20pr =12
+重扣带
+17fhr 18str 54lf 10mana  24fr （三层） =16
+金属扣带
+10fhr 13str 42lf 23fr  =4
+16str 41lf 12cr 18lr 17fr =6
+巨战腰带
+81ed 17str 36lf 30cr 20fr =4
+
+衣服：
+99ed 13str 58lf 16cr 5fr   =20
+100ed 5dex 26lf 18fr  MDR1  =12
+24fhr 38ed 8str 4dex 34mana 20fr =8     
+90ed 47lf 21fr 6pr               =14
+99ed 2lf 25fr 8pr MDR3 -负20    =8
+17fhr 96ed 1str 22lf 3mana 21lr =8
+24fhr 87ed 2str 11cr 28fr       =8
+41ed 13str 39lf 30fr mdr3        =6
+76ed 1str 31lf 36mana 20fr     =30
+86ed 15str 14mana 24fr MDR3 =25
+24fhr 56ed 1str 27fr 29cr -负30 =8
+10fhr 100ed 28fr 50%plr         =8
+17fhr 15ed 39mana 28fr DR7 -负30=8
+
+24fhr 74ed 2str 33lf 19fr       =10
+24fhr 89ed 4dex 28lf 10fr 29pr =10
+82ed 43lf 29fr 7pr dr5 mdr2     =16
+62ed 53lf 29fr dr4              =8
+24fhr 77ed 13str 20fr     =10
+80ed 25lf 23fr 7pr DR5 MDR2=6
+
+头盔：
+fhr 5精力 33lf 16lr 22fr 23pr =5  
+10精力 33lf 22cr 28lr 27fr    =6  
+
+
+鞋子：
+30run 6dex 39cr 30fr 30pr  9mf  锁链鞋 =16
+30run 33lr 25mf          轻型金属鞋 =2
+30run 8cr 36fr 53eg 23mf 轻型金属鞋 =2
+30run 9dex 27lrr 25pr    轻型金属鞋 =4
+30run 9dex 39lr 22mf             锁链鞋=4
+20run 34fr 36pr 24mf             重鞋=2
+30run 9dex 34lr 7pr 22mf       魔皮鞋=2
+30run 33ed 9dex 7cr 32fr 24mf  魔皮鞋=5
+30run 10fhr 18mana 33cr 19fr            锁链鞋=10
+30run 9dex 35fr 21cr 16mf   磨皮鞋 =10
+20run 7dex 38mana 26fr 29pr 魔皮鞋=12
+30run 25lr 79eg 8mf 沙皮鞋 =2
+30run 40lr 74eg 19mf 打钱鞋=3
+
+戒指：
+fcr 39mana 23cr 24fr dr1       =10
+fcr 35mana 15cr 27fr            =8
+fcr 2dex 35mana 29fr 5pr =4
+fcr 15精力 4lf 30cr 26fr =4
+fcr 1dex 57mana 8cr 30fr =14
+fcr 1lf 27cr 25lr 27fr =6
+fcr 9lf 12cr 27lr 21fr =4
+fcr 6dex 26mana 25fr  =2
+
+项链：
+2p fcr 7回血 39fr      =50
+2p fcr 5cr 33fr 12mf   =35
+2p fcr 7精力 31fr      =30
+1p fcr 26mana 25fr 6mf =1
+2p  17r  =1
+2p  13str 16r 29pr  29eg =10 
+2p  10str 7dex 6精力 16r  =8
+2p 16str 5mana 27fr dr3   =4 
+2p 20r 9回血  25mf    =8
+2p 2str 15精力 24lf  29mana 35fr  =4
+2p 19r 26lr    =2
+2p 39lf 8精力 16r    =8
+2p 20dex 48mana 20r 68eg =35
+2s fcr 17dex 31fr 37cr  =88 
+2s  16r =5  
+2s  16r 4str 23 mana=10
+2s  15str 33cr 32fr MDR2   =22
+2s  6str 20dex 37fr          =25
+2s 18str 27fr dr2            =6
+2s 30lf 36fr 27pr dr3        =10
+2s 18str 21lf 40cr            =8 
+2s 35mana  33fr hfd 12mf =6
+2s 40fr 27pr 23mf  =10
+2s 15dex 18r        =25
+2s 13str 59lf 29lr 22fr =40
+2s 19r 58fr 8mf =88
