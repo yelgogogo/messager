@@ -2,6 +2,7 @@ const Koa = require('koa');
 const db = require('diskdb');
 const cors = require('koa2-cors');
 const Router = require('koa-router');
+const moment = require('moment');
 const {PROP, CATEGORY} = require('./utils/enum')
 
 const app = new Koa();
@@ -15,8 +16,12 @@ const router = new Router();
 router.get('/getGoods', (ctx, next) => {
   // ctx.router available
   let {currentPage, pageSize, filter, sorter} = ctx.request.query
+  const clientIp = ctx.request.ip;
+  const time = moment().format('YYYY-MM-DD HH:mm:ss');
+  db.connect('db', ['logs']);
+  db.logs.save({clientIp, time})
   db.connect('db', ['goods']);
-  console.log(filter)
+
   currentPage = currentPage ? currentPage : 1
   pageSize = pageSize ? pageSize : 20
   let filterObj = filter ? JSON.parse(filter) : {}

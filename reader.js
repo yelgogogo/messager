@@ -67,6 +67,16 @@ const setGoods = (owner, category,goodsStr ) => {
     } else if (comment.indexOf('PG') !== -1) {
       priceUnit = 'PG'
       priceValue = price
+    } else if (comment.indexOf('#') !== -1) {
+      if (price < 24) {
+        priceUnit = 'PG'
+        price = Math.pow(2,(price - 20)) * 5
+        priceValue = price
+      } else if (price > 23){
+        priceUnit = 'IST'
+        price = Math.pow(2,(price - 24))
+        priceValue = price * 40
+      }
     } else {
       priceUnit = 'IST'
       priceValue = price * 40
