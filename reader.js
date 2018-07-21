@@ -16,13 +16,17 @@ const translator = (value) => {
   return Object.assign(res, {propArray:[{name: type, value: num}]})
 }
 
-const ownerArray = ['大仁哥', '献血之披风']
+const ownerArray = [
+  {owner:'大仁哥',url:'http://bbs.impk.cc/ShowTopic-8085318-124.php?type=dyn'},
+  {owner:'献血之披风',url:'http://bbs.impk.cc/ShowTopic-8164609-124.php?type=dyn'},
+  {owner:'zkkkk',url:'http://bbs.impk.cc/ShowTopic-8186758-124.php?type=dyn'}
+]
 // const ownerArray = ['sample']
-const readFile = (name) => {
-  fs.readFile(`./data/${name}`, 'utf8', (err, data) => {
+const readFile = (ownerObj) => {
+  let {owner, url} = ownerObj
+  fs.readFile(`./data/${owner}`, 'utf8', (err, data) => {
     // console.log(data);  
-    const file = name.split('_')
-    let owner = name
+    const file = owner.split('_')
     const arr = data.toUpperCase().split('\n')
     let category = ''
     db.connect('db', ['goods']);
@@ -37,7 +41,7 @@ const readFile = (name) => {
         category = CATEGORY[goods]
       } else {      
         if (category) {
-          db.goods.save(setGoods(owner, category, goods));
+          db.goods.save(setGoods(owner, url, category, goods));
         }
       }
     })
@@ -49,7 +53,7 @@ ownerArray.forEach(o => {
   readFile(o);
 })
 
-const setGoods = (owner, category,goodsStr ) => {
+const setGoods = (owner, url, category,goodsStr ) => {
   const text = goodsStr.trim()
   let priceReg = /\=\s*[0-9]+/
   let priceTest = priceReg.exec(text)
@@ -92,7 +96,7 @@ const setGoods = (owner, category,goodsStr ) => {
     delete allProp.propArray
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
+  let goods = Object.assign({text, owner, url, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
   return goods
   
 }
