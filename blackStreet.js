@@ -4,14 +4,23 @@ const cors = require('koa2-cors');
 const Router = require('koa-router');
 const moment = require('moment');
 const {PROP, CATEGORY} = require('./utils/enum')
+const HTML = require('./echarts/hour')
+const { createReadStream } = require('fs') ;
 
 const app = new Koa();
 app.use(cors());
 const router = new Router();
 
-// router.get('/getEnum', (ctx, next) => {
-//   ctx.body = {PROP, CATEGORY};
-// });
+router.get('/statistics/hour', (ctx, next) => {
+  ctx.type = 'html'
+  ctx.body = createReadStream('./echarts/hour.html');
+  // ctx.body = HTML;
+});
+
+router.get('/getHourStatistics', (ctx, next) => {
+  db.connect('db', ['hourStatistics']);
+  ctx.body = db.hourStatistics.find()
+})
 
 router.get('/getGoods', (ctx, next) => {
   // ctx.router available
