@@ -4,7 +4,6 @@ const cors = require('koa2-cors');
 const Router = require('koa-router');
 const moment = require('moment');
 const {PROP, CATEGORY} = require('./utils/enum')
-const HTML = require('./echarts/hour')
 const { createReadStream } = require('fs') ;
 
 const app = new Koa();
