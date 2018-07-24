@@ -18,10 +18,12 @@
           var db = res.data
           var xData = db.map(function(x) {
             var xDataRes = ''
-            if (x.hour ==='00') {
-              xDataRes = x.date + ' ' + x.hour + ':00:00'
+            if (x.hour ==='08') {
+              xDataRes = x.date + ' ' + x.hour + ':00'
+            } else if (x.hour < '08'){
+              xDataRes = ''
             } else {
-              xDataRes = x.date + ' ' + x.hour + ':00:00'
+              xDataRes = x.date + ' ' + x.hour + ':00'
             }
             return xDataRes
           })
@@ -41,7 +43,9 @@
                   data:['访问量']
               },
               xAxis: {
-                  data: xData
+                show : true,
+                nameRotate: 45,
+                data: xData
               },
               yAxis: {},
               series: [{

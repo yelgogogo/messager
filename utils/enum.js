@@ -24,6 +24,8 @@ const PROP = {
 	'ED_TXT': '增强物品属性',
 	'STR': 'STR',
 	'STR_TXT': '力量',
+	'AR':'AR',
+	'AR_TXT':'准确率加成',
 	'LIFE': 'LIFE',
 	'生命': 'LIFE',
 	'LM': 'LM',

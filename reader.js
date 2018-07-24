@@ -19,9 +19,10 @@ const translator = (value) => {
 const ownerArray = [
   {owner:'大仁哥',url:'http://bbs.impk.cc/ShowTopic-8085318-124.php?type=dyn'},
   {owner:'献血之披风',url:'http://bbs.impk.cc/ShowTopic-8164609-124.php?type=dyn'},
+  {owner:'iasias',url:'http://bbs.impk.cc/ShowTopic-8191583-124.php?type=dyn'},
   {owner:'zkkkk',url:'http://bbs.impk.cc/ShowTopic-8186758-124.php?type=dyn'}
 ]
-// const ownerArray = ['sample']
+// const ownerArray = [{owner:'sample', url:'http://bbs.impk.cc/ShowTopic-8186758-124.php?type=dyn'}]
 const readFile = (ownerObj) => {
   let {owner, url} = ownerObj
   fs.readFile(`./data/${owner}`, 'utf8', (err, data) => {
@@ -55,7 +56,7 @@ ownerArray.forEach(o => {
 
 const setGoods = (owner, url, category,goodsStr ) => {
   const text = goodsStr.trim()
-  let priceReg = /\=\s*[0-9]+/
+  let priceReg = /\=\s*[0-9]+\.{0,1}[0-9]{0,2}/
   let priceTest = priceReg.exec(text)
   let price = 0
   let priceValue = 0
@@ -63,7 +64,7 @@ const setGoods = (owner, url, category,goodsStr ) => {
   let propTxt = ''
   propTxt = text
   if(priceTest) {
-    price = parseInt(priceTest[0].replace(/\=/, '').trim())
+    price = parseFloat(priceTest[0].replace(/\=/, '').trim())
     comment = text.substr(priceTest.index).replace(priceReg, '').trim()
     if(comment.indexOf('IST') !== -1) {
       priceUnit = 'IST'
@@ -87,6 +88,7 @@ const setGoods = (owner, url, category,goodsStr ) => {
     }
     propTxt = text.substr(0, priceTest.index)
   }
+  // console.log(price, priceUnit)
   let propArr = propTxt.trim().replace(/\s\s*/g,' ').split(' ')
   let prop = {}
   let propArray = []
