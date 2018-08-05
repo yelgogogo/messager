@@ -5,7 +5,7 @@ const db = require('diskdb');
 
 const translator = (value) => {
   const typeTxt = value.replace(/[0-9]/g, '')
-  const type = PROP[typeTxt]?PROP[typeTxt]:''
+  const type = PROP[typeTxt]?PROP[typeTxt]:typeTxt
   numReg = /[0-9]+/
   let num =  numReg.exec(value) ? numReg.exec(value)[0] : ''
   if (type==='FCR' && num==='') {
@@ -17,11 +17,7 @@ const translator = (value) => {
 }
 
 const ownerArray = [
-  {owner:'大仁哥',url:'http://bbs.impk.cc/ShowTopic-8085318-124.php?type=dyn'},
-  {owner:'献血之披风',url:'http://bbs.impk.cc/ShowTopic-8164609-124.php?type=dyn'},
-  {owner:'iasias',url:'http://bbs.impk.cc/ShowTopic-8191583-124.php?type=dyn'},
-  {owner:'zkkkk',url:'http://bbs.impk.cc/ShowTopic-8186758-124.php?type=dyn'},
-  {owner:'parke--impk',url:'http://bbs.impk.cc/ShowTopic-8193528-124.php?type=dyn'}
+  {owner:'yelgogogo',url:'http://bbs.impk.cc/ShowTopic-8085318-124.php?type=dyn'},
 ]
 // const ownerArray = [{owner:'sample', url:'http://bbs.impk.cc/ShowTopic-8186758-124.php?type=dyn'}]
 const readFile = (ownerObj) => {
@@ -31,8 +27,8 @@ const readFile = (ownerObj) => {
     const file = owner.split('_')
     const arr = data.toUpperCase().split('\n')
     let category = ''
-    db.connect('db', ['goods']);
-    db.goods.remove({owner}, true);
+    db.connect('db', ['sales']);
+    db.sales.remove({owner}, true);
     arr.forEach(goods => {
       goods = goods.trim()
       if (!goods) {
@@ -43,7 +39,7 @@ const readFile = (ownerObj) => {
         category = CATEGORY[goods]
       } else {      
         if (category) {
-          db.goods.save(setGoods(owner, url, category, goods));
+          db.sales.save(setGoods(owner, url, category, goods));
         }
       }
     })
@@ -56,8 +52,13 @@ ownerArray.forEach(o => {
 })
 
 const setGoods = (owner, url, category,goodsStr ) => {
-  const text = goodsStr.trim()
+  let text = goodsStr.trim()
   let priceReg = /\=\s*[0-9]+\.{0,1}[0-9]{0,2}/
+  let accReg = /\$/
+  let accTest = accReg.exec(text)
+  let accText = text.substr(accTest.index + 1)
+  let account = JSON.parse(accText)
+  text = text.substr(0,accTest.index -1)
   let priceTest = priceReg.exec(text)
   let price = 0
   let priceValue = 0
@@ -76,7 +77,7 @@ const setGoods = (owner, url, category,goodsStr ) => {
     } else if (comment.indexOf('#') !== -1) {
       if (price < 24) {
         priceUnit = 'PG'
-        price = Math.pow(2,(price - 20)) * 5
+        price = Math.pow(2,(price - 20)) * 2.5
         priceValue = price
       } else if (price > 23){
         priceUnit = 'IST'
@@ -99,7 +100,8 @@ const setGoods = (owner, url, category,goodsStr ) => {
     delete allProp.propArray
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, url, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
+  let status = 'SALE'
+  let goods = Object.assign({account, status, text, owner, url, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
   return goods
   
 }
