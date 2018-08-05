@@ -49,13 +49,19 @@ router.get('/getHourStatistics', (ctx, next) => {
   ctx.body = db.hourStatistics.find()
 })
 
+router.get('/mailCount', (ctx, next) => {
+  const clientIp = ctx.request.ip;
+  const transactions = db.transactions.find({clientIp})
+  ctx.body = transactions.length
+})
+
 router.get('/buy', (ctx, next) => {
   let query = ctx.request.query
   const clientIp = ctx.request.ip;
   let res = null
   if (checkUser(clientIp) > 0 ) {
     let finder = db.sales.findOne(query)
-    if( finder.status === 'SALE') {
+    if( finder && finder.status === 'SALE') {
       finder.status = 'LOCK'
       changeUserTimes(clientIp, -1)
       finder.clientIp = clientIp
