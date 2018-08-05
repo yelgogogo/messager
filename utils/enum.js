@@ -107,6 +107,13 @@ const CATEGORY = {
   '盾牌:': 'SHIELD',
   'SHIELD_TXT': '盾牌'
 }
+
+const TRANS_STATUS = {
+  'SALE': '物品出售中',
+  'LOCK': '交易锁定',
+  'REQUEST': '交易待确认',
+  'SUCCESS': '交易完成'
+}
 module.exports = {
-  PROP, CATEGORY
+  PROP, CATEGORY, TRANS_STATUS
 }
