@@ -16,6 +16,7 @@ db.connect('db', ['hourStatistics']);
 db.connect('db', ['logs']);
 db.connect('db', ['goods']);
 db.connect('db', ['userLocked']);
+db.connect('db', ['auction']);
 
 const checkUser = (clientIp) => {
   let user = db.userLocked.findOne({clientIp})
@@ -106,8 +107,8 @@ router.get('/getGoods', (ctx, next) => {
   // ctx.router available
   let {currentPage, pageSize, filter, sorter} = ctx.request.query
   const clientIp = ctx.request.ip;
-  const getTime = getTime()
-  const logObj = Object.assign(getTime, {clientIp})
+  const getTimes = getTime()
+  const logObj = Object.assign(getTimes, {clientIp})
   db.logs.save(logObj)
   
 
@@ -144,12 +145,8 @@ router.get('/getGoods', (ctx, next) => {
 });
 
 router.get('/getSales', (ctx, next) => {
-  // ctx.router available
   let {currentPage, pageSize, filter, sorter} = ctx.request.query
   const clientIp = ctx.request.ip;
-  
-  // db.connect('db', ['logs']);
-  // db.logs.save({clientIp, time, date, hour, minute})
 
   currentPage = currentPage ? currentPage : 1
   pageSize = pageSize ? pageSize : 20
@@ -186,6 +183,47 @@ router.get('/getSales', (ctx, next) => {
   const data = finder.slice(start, end)
   ctx.body = {currentPage, pageSize, total,filter,data};
 });
+
+router.get('/getAuction', (ctx, next) => {
+  let {currentPage, pageSize, filter, sorter} = ctx.request.query
+  const clientIp = ctx.request.ip;
+
+  currentPage = currentPage ? currentPage : 1
+  pageSize = pageSize ? pageSize : 20
+  let filterObj = filter ? JSON.parse(filter) : {}
+  let finder = db.auction.find(filterObj)
+  finder = finder.map(f => {
+    delete f.account
+    return f
+  })
+  if (filter !== '{}') {
+    finder = finder.filter( i => {
+      let res = true
+      for(let prop in filterObj) {
+        if(!i[prop]) {
+          res = false
+        }
+      }
+      return res
+    })
+  }
+  if(sorter !== '{}') {
+    let sorterObj = sorter ? JSON.parse(sorter) : {}
+    finder = finder.sort( (a, b) => {
+      let res = a[sorterObj.name] > b[sorterObj.name] ? 1 : -1
+      if (!sorterObj.asc) {
+        res = 0 - res
+      }
+      return res
+    })
+  }
+  const total = finder.length
+  const start = (currentPage - 1) * pageSize
+  const end = currentPage * pageSize
+  const data = finder.slice(start, end)
+  ctx.body = {currentPage, pageSize, total,filter,data};
+});
+
 
 
 app
