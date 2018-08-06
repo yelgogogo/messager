@@ -64,6 +64,11 @@ router.get('/mailCount', (ctx, next) => {
   ctx.body = transactions.length
 })
 
+router.get('/getItem', (ctx, next) => {
+  const {_id} = ctx.request.query;
+  const item = db.goods.findOne({_id})
+  ctx.body = item
+})
 
 router.get('/deleteMail', (ctx, next) => {
   const {_id} = ctx.request.query;

@@ -53,8 +53,14 @@ ownerArray.forEach(o => {
 
 const setGoods = (owner, url, category,goodsStr ) => {
   const text = goodsStr.trim()
+  let dateReg = /[0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日/
   let priceReg = /\=\s*[0-9]+\.{0,1}[0-9]{0,2}/
   let priceTest = priceReg.exec(text)
+  let dateTest = dateReg.exec(text)
+  let date = ''
+  if(dateTest) {
+    date = dateTest[0]
+  }
   let price = 0
   let priceValue = 0
   let comment = ''
@@ -95,7 +101,8 @@ const setGoods = (owner, url, category,goodsStr ) => {
     delete allProp.propArray
     prop = Object.assign(prop, allProp)
   })
-  let goods = Object.assign({text, owner, url, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
+
+  let goods = Object.assign({text, date, owner, url, category, price, priceUnit, priceValue, comment}, prop, {propArray: propArray})
   return goods
   
 }
