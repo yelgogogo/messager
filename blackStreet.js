@@ -65,8 +65,13 @@ router.get('/mailCount', (ctx, next) => {
 })
 
 router.get('/getItem', (ctx, next) => {
-  const {_id} = ctx.request.query;
-  const item = db.goods.findOne({_id})
+  const {_id, dbName} = ctx.request.query;
+  let item = null
+  if (dbName) {
+    item = db[dbName].findOne({_id})
+  } else {
+    item = db.goods.findOne({_id})
+  }
   ctx.body = item
 })
 
