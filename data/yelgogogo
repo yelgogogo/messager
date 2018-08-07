@@ -1,8 +1,10 @@
 衣服:
-白色法师铠甲 X3 = 23# ${"IACC":"yelgrid1","IPSW":"1234","GACC":"yelgold1","GPSW":"1234"}
+白色法师铠甲 X3 = 20PG ${"IACC":"YELGR1","IPSW":"1234","GACC":"YELGR1","GPSW":"1234"}
 盾牌:
-白色冷酷之盾 X3 = 23# ${"IACC":"yelgrid2","IPSW":"1324","GACC":"yelgold2","GPSW":"1324"}
+白色冷酷之盾 X3 = 20PG ${"IACC":"YELGR2","IPSW":"1324","GACC":"YELGR2","GPSW":"1324"}
 腰带:
-白色魔皮腰带 X3 = 23# ${"IACC":"yelgrid3","IPSW":"2345","GACC":"yelgold3","GPSW":"2345"}
+白色魔皮腰带 X3 = 20PG ${"IACC":"YELGR3","IPSW":"2345","GACC":"YELGR3","GPSW":"2345"}
 鞋子:
-白色魔皮鞋子 X3 = 23# ${"IACC":"yelgrid4","IPSW":"2435","GACC":"yelgold4","GPSW":"2435"}
+白色魔皮鞋子 X3 = 20PG ${"IACC":"YELGR4","IPSW":"2435","GACC":"YELGR4","GPSW":"2435"}
+武器:
+鸟弓 = 5PG ${"IACC":"YELGR5","IPSW":"3456","GACC":"YELGR5","GPSW":"3456"}

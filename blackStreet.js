@@ -11,6 +11,7 @@ app.use(cors());
 const router = new Router();
 
 db.connect('db', ['transactions']);
+db.connect('db', ['transactionsHistory']);
 db.connect('db', ['sales']);
 db.connect('db', ['hourStatistics']);
 db.connect('db', ['logs']);
@@ -21,8 +22,8 @@ db.connect('db', ['auction']);
 const checkUser = (clientIp) => {
   let user = db.userLocked.findOne({clientIp})
   if (!user) {
-    db.userLocked.save({clientIp, times:100})
-    user = {clientIp, times:100}
+    db.userLocked.save({clientIp, times:3})
+    user = {clientIp, times:3}
   }
   return user.times
 }
@@ -106,6 +107,7 @@ router.get('/buy', (ctx, next) => {
       const getTimes = getTime()
       finder.time = getTimes.time
       db.transactions.save(finder)
+      db.transactionsHistory.save(finder)
       console.log(updated)
       res = finder.account
     }

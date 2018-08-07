@@ -102,6 +102,7 @@ const CATEGORY = {
   '鞋子:': 'BOOTS',
   'BOOTS_TXT': '靴子',
   '武器：': 'WEAPON',
+  '武器:': 'WEAPON',
   'WEAPON_TXT': '武器',
   '盾：': 'SHIELD',
   '盾牌：': 'SHIELD',
